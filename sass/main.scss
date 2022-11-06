@@ -7,7 +7,7 @@ html {
 	font-size: 62.5%;
 }
 :root {
-	--titleColor: #c9a72f;
+	--titleColor: #e7c444;
 	--plusColor: #eeafff;
 	--dataTextColor: rgb(164, 184, 169);
 	--boxColor: rgba(40, 44, 41, 0.65);
@@ -15,8 +15,12 @@ html {
 	--deflaColor: rgb(101, 224, 63);
 	--textColor: #fff;
 	--daysColor: #afc0ff;
+	--inputColor: rgba(255, 255, 255, 0.85);
 }
 body {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	background-image: url('../img/the-market-3147758_640.jpg');
 	background-attachment: fixed;
 	background-size: cover;
@@ -31,12 +35,14 @@ button {
 button:active {
 	animation: btnAnimation 0.2s;
 }
+
 .container {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	width: 100%;
 	.container-shadow {
+		height: 100vh;
 		background-color: rgba(0, 0, 0, 0.35);
 		.top {
 			display: flex;
@@ -58,7 +64,7 @@ button:active {
 				color: var(--plusColor);
 			}
 		}
-		ul {
+		.list {
 			display: flex;
 			flex-direction: column;
 			align-items: center;
@@ -127,6 +133,7 @@ button:active {
 	display: flex;
 	justify-content: center;
 	height: 100vh;
+	width: 100vh;
 	padding: 2rem;
 	background-color: var(--boxColor);
 	form {
@@ -146,11 +153,12 @@ button:active {
 				margin-bottom: 0.5rem;
 				width: 70%;
 				text-align: center;
+				background-color: var(--inputColor);
 				border-radius: 1rem;
 				border: none;
 			}
 			.error-text {
-				// visibility: hidden;
+				visibility: hidden;
 				margin-top: 0.5rem;
 				font-size: 1.1rem;
 				color: var(--inflaColor);
@@ -173,6 +181,9 @@ button:active {
 		}
 	}
 }
+.hide {
+	display: none;
+}
 @keyframes btnAnimation {
 	0% {
 		transform: scale(1);
@@ -182,5 +193,14 @@ button:active {
 	}
 	100% {
 		transform: scale(1);
+	}
+}
+@media (min-width: 576px) {
+	body {
+		background-image: url('../img/the-market-3147758_1920.jpg');
+	}
+	.container,
+	.new-article-popup {
+		width: 559px;
 	}
 }

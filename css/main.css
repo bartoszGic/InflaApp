@@ -10,7 +10,7 @@ html {
 }
 
 :root {
-  --titleColor: #c9a72f;
+  --titleColor: #e7c444;
   --plusColor: #eeafff;
   --dataTextColor: rgb(164, 184, 169);
   --boxColor: rgba(40, 44, 41, 0.65);
@@ -18,9 +18,20 @@ html {
   --deflaColor: rgb(101, 224, 63);
   --textColor: #fff;
   --daysColor: #afc0ff;
+  --inputColor: rgba(255, 255, 255, 0.85);
 }
 
 body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   background-image: url("../img/the-market-3147758_640.jpg");
   background-attachment: fixed;
   background-size: cover;
@@ -52,6 +63,7 @@ button:active {
   width: 100%;
 }
 .container .container-shadow {
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.35);
 }
 .container .container-shadow .top {
@@ -81,7 +93,7 @@ button:active {
   font-size: 5rem;
   color: var(--plusColor);
 }
-.container .container-shadow ul {
+.container .container-shadow .list {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -94,7 +106,7 @@ button:active {
           align-items: center;
   list-style-type: none;
 }
-.container .container-shadow ul li {
+.container .container-shadow .list li {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -111,14 +123,14 @@ button:active {
   background-color: var(--boxColor);
   border-radius: 0.8rem;
 }
-.container .container-shadow ul li .name {
+.container .container-shadow .list li .name {
   margin-top: 1rem;
   font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: 0.2rem;
   color: var(--titleColor);
 }
-.container .container-shadow ul li .article-data {
+.container .container-shadow .list li .article-data {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -129,20 +141,20 @@ button:active {
   padding: 1rem 1rem 0;
   color: var(--textColor);
 }
-.container .container-shadow ul li .article-data p {
+.container .container-shadow .list li .article-data p {
   margin-bottom: 0.5rem;
   font-size: 1.3rem;
 }
-.container .container-shadow ul li .article-data .article-data-value {
+.container .container-shadow .list li .article-data .article-data-value {
   color: var(--dataTextColor);
 }
-.container .container-shadow ul li .article-data .infla-value {
+.container .container-shadow .list li .article-data .infla-value {
   font-size: 1.75rem;
   font-weight: 700;
   color: var(--inflaColor);
 }
-.container .container-shadow ul li .article-data .infla,
-.container .container-shadow ul li .article-data .scale {
+.container .container-shadow .list li .article-data .infla,
+.container .container-shadow .list li .article-data .scale {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -155,17 +167,17 @@ button:active {
           justify-content: center;
   text-align: center;
 }
-.container .container-shadow ul li .article-data .infla .scale-value,
-.container .container-shadow ul li .article-data .scale .scale-value {
+.container .container-shadow .list li .article-data .infla .scale-value,
+.container .container-shadow .list li .article-data .scale .scale-value {
   font-size: 1.75rem;
   color: var(--daysColor);
 }
-.container .container-shadow ul li .tools {
+.container .container-shadow .list li .tools {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
-.container .container-shadow ul li .tools .fa-solid {
+.container .container-shadow .list li .tools .fa-solid {
   margin: 0 1rem;
   padding: 1rem;
   font-size: 1.5rem;
@@ -180,6 +192,7 @@ button:active {
       -ms-flex-pack: center;
           justify-content: center;
   height: 100vh;
+  width: 100vh;
   padding: 2rem;
   background-color: var(--boxColor);
 }
@@ -207,10 +220,12 @@ button:active {
   margin-bottom: 0.5rem;
   width: 70%;
   text-align: center;
+  background-color: var(--inputColor);
   border-radius: 1rem;
   border: none;
 }
 .new-article-popup form .form-box .error-text {
+  visibility: hidden;
   margin-top: 0.5rem;
   font-size: 1.1rem;
   color: var(--inflaColor);
@@ -233,6 +248,10 @@ button:active {
 }
 .new-article-popup form .tools-btns .fa-xmark {
   color: var(--inflaColor);
+}
+
+.hide {
+  display: none;
 }
 
 @-webkit-keyframes btnAnimation {
@@ -262,5 +281,14 @@ button:active {
   100% {
     -webkit-transform: scale(1);
             transform: scale(1);
+  }
+}
+@media (min-width: 576px) {
+  body {
+    background-image: url("../img/the-market-3147758_1920.jpg");
+  }
+  .container,
+.new-article-popup {
+    width: 559px;
   }
 }/*# sourceMappingURL=main.css.map */
