@@ -15,78 +15,81 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="top">
-            <h1>InflApp</h1>
-            <button><i class="add-btn fa-solid fa-plus"></i></button>
-        </div>
-        <ul>
-            <li>
-                <div class="name">Nazwa</div>
-                <div class="article-data">
-                    <div class="start-values">
-                        <p>Start</p>
-                        <p class="start-date article-data-value">23.12.2021</p>
-                        <p>Cena</p>
-                        <p class="start-price article-data-value">20 zł</p>
-                    </div>
-                    <div class="actual-values">
-                        <p>Ostatnia aktualizacja</p>
-                        <p class="actual-date article-data-value">27.12.2021</p>
-                        <p>Cena</p>
-                        <p class="start-price article-data-value">25 zł</p>
-                    </div>
-                    <div class="infla">
-                        <p>Wartoś</p>
-                        <p class="infla-value article-data-value">15 %</p>
-                    </div>
-                    <div class="scale">
-                        <p>Skala</p>
-                        <p class="scale-value article-data-value">4 dni</p>
-                    </div>
-                </div>
-                <div class="tools">
-                    <button><i class="fa-solid fa-pen-to-square"></i></button>
-                    <button><i class="fa-solid fa-trash"></i></button>
-                </div>
-            </li>
-        </ul>
-        <div class="new-article-popup">
-            <form>
-                <div class="form-box">
-                    <label for="art-name">Nazwa artykułu</label>
-                    <input type="text" id="art-name">
-                    <p class="art-name error-text">Wpisz nazwe artykułu</p>
-                </div>
-                <div class="form-box">
-                    <label for="art-date">Data startowa</label>
-                    <input type="date" id="art-date">
-                    <p class="art-date error-text">Wpisz date pierwszego zakupu artykułu</p>
-                </div>
-                <div class="form-box">
-                    <label for="art-price">Cena pierwotna (zł)</label>
-                    <input type="number" id="art-price">
-                    <p class="art-name error-text">Wpisz cene artykułu</p>
-                </div>
-                <div class="form-box">
-                    <label for="art-date">Data aktualizacji</label>
-                    <input type="date" id="art-date">
-                    <p class="art-date error-text">Data nie może być wcześnejsza od daty pierwszego zakupu
-                    </p>
-                </div>
-                <div class="form-box">
-                    <label for="art-price">Ostatnia cena (zł)</label>
-                    <input type="number" id="art-price">
-                    <p class="art-name error-text">Wpisz cenę</p>
-                </div>
-                <div class="tools-btns">
-                    <button><i class="fa-solid fa-square-check"></i></button>
-                    <button><i class="fa-solid fa-xmark"></i></button>
-                </div>
-            </form>
-        </div>
-    </div>
 
+    <div class="container">
+        <div class="container-shadow">
+            <div class="top">
+                <h1>Infl<span>App</span></h1>
+                <button><i class="add-btn fa-solid fa-plus"></i></button>
+            </div>
+            <ul class="list">
+                <li>
+                    <div class="name">Nazwa nazwa nazwa</div>
+                    <div class="article-data">
+                        <div class="start-values">
+                            <p>Start</p>
+                            <p class="start-date article-data-value">23.12.2021</p>
+                            <p>Cena</p>
+                            <p class="start-price article-data-value">20 zł</p>
+                        </div>
+                        <div class="actual-values">
+                            <p>Aktualizacja</p>
+                            <p class="actual-date article-data-value">27.12.2021</p>
+                            <p>Cena</p>
+                            <p class="start-price article-data-value">25 zł</p>
+                        </div>
+                        <div class="infla">
+                            <p>Wartość</p>
+                            <p class="infla-value article-data-value">15 %</p>
+                        </div>
+                        <div class="scale">
+                            <p>Skala</p>
+                            <p class="scale-value article-data-value">4 dni</p>
+                        </div>
+                    </div>
+                    <div class="tools">
+                        <button><i class="fa-solid fa-pen-to-square"></i></button>
+                        <button><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <div class="new-article-popup">
+        <form>
+            <div class="form-box">
+                <label for="art-name">Nazwa artykułu</label>
+                <input type="text" id="art-name">
+                <p class="art-name error-text">Wpisz nazwe artykułu</p>
+            </div>
+            <div class="form-box">
+                <label for="art-date">Data startowa</label>
+                <input type="date" id="art-date">
+                <p class="art-date error-text">Wpisz date pierwszego zakupu artykułu</p>
+            </div>
+            <div class="form-box">
+                <label for="art-price">Cena pierwotna (zł)</label>
+                <input type="number" id="art-price">
+                <p class="art-name error-text">Wpisz cene artykułu</p>
+            </div>
+            <div class="form-box">
+                <label for="art-date">Data aktualizacji</label>
+                <input type="date" id="art-date">
+                <p class="art-date error-text">Data nie może być wcześnejsza od daty pierwszego zakupu
+                </p>
+            </div>
+            <div class="form-box">
+                <label for="art-price">Ostatnia cena (zł)</label>
+                <input type="number" id="art-price">
+                <p class="art-name error-text">Wpisz cenę</p>
+            </div>
+            <div class="tools-btns">
+                <button><i class="fa-solid fa-square-check"></i></button>
+                <button><i class="fa-solid fa-xmark"></i></button>
+            </div>
+        </form>
+    </div>
 
     <script src="./script.js"></script>
 </body>

@@ -7,28 +7,26 @@ html {
 	font-size: 62.5%;
 }
 :root {
-	--bgColor: #7fbcd2;
-	--plusColor: #ffeeaf;
-	--boxColor: #e1ffee;
-	--inflaColor: red;
-	--deflaColor: green;
-	--toolsColor: #9597ff;
+	--titleColor: #c9a72f;
+	--plusColor: #eeafff;
+	--dataTextColor: rgb(164, 184, 169);
+	--boxColor: rgba(40, 44, 41, 0.65);
+	--inflaColor: rgb(228, 68, 68);
+	--deflaColor: rgb(101, 224, 63);
+	--textColor: #fff;
+	--daysColor: #afc0ff;
 }
 body {
-	display: flex;
-	justify-content: center;
-	background-color: var(--bgColor);
+	background-image: url('../img/the-market-3147758_640.jpg');
+	background-attachment: fixed;
+	background-size: cover;
 	font-family: 'Roboto', sans-serif;
 }
-.hide {
-	display: none;
-}
-.fa-solid {
-	cursor: pointer;
-}
+
 button {
 	background-color: transparent;
 	border: none;
+	cursor: pointer;
 }
 button:active {
 	animation: btnAnimation 0.2s;
@@ -37,73 +35,100 @@ button:active {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	width: 95%;
-}
-.top {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	margin-top: 3rem;
-	h1 {
-		font-family: 'Lexend Zetta', sans-serif;
-		font-size: 4rem;
-		letter-spacing: 0.5rem;
-	}
-	.add-btn {
-		margin: 1.5rem auto;
-		font-size: 5rem;
-		color: var(--plusColor);
-	}
-}
-ul {
-	display: flex;
-	flex-direction: column;
-	list-style-type: none;
-	li {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		margin: 0.5rem 0;
-		background-color: var(--boxColor);
-		border-radius: 0.8rem;
-		.name {
-			margin-top: 1rem;
-			font-size: 1.5rem;
-			font-weight: 700;
-			letter-spacing: 0.1rem;
-		}
-		.article-data {
+	width: 100%;
+	.container-shadow {
+		background-color: rgba(0, 0, 0, 0.35);
+		.top {
 			display: flex;
-			justify-content: space-between;
-			width: 100%;
-			padding: 1rem 1rem 0;
-			p {
-				margin-bottom: 0.5rem;
-				font-size: 1.3rem;
+			flex-direction: column;
+			align-items: center;
+			margin-top: 3rem;
+			h1 {
+				font-family: 'Lexend Zetta', sans-serif;
+				font-size: 4rem;
+				letter-spacing: 0.5rem;
+				color: var(--titleColor);
+				span {
+					color: var(--textColor);
+				}
 			}
-			.article-data-value {
-				font-weight: 700;
-			}
-			.infla-value {
-				color: var(--inflaColor);
+			.add-btn {
+				margin: 1.5rem auto;
+				font-size: 5rem;
+				color: var(--plusColor);
 			}
 		}
-		.tools {
+		ul {
 			display: flex;
-			.fa-solid {
-				margin: 0 1rem;
-				padding: 1rem;
-				font-size: 1.5rem;
-				color: var(--toolsColor);
+			flex-direction: column;
+			align-items: center;
+			list-style-type: none;
+			li {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				width: 95%;
+				margin: 0.5rem 0;
+				color: var(--plusColor);
+				background-color: var(--boxColor);
+				border-radius: 0.8rem;
+				.name {
+					margin-top: 1rem;
+					font-size: 1.5rem;
+					font-weight: 700;
+					letter-spacing: 0.2rem;
+					color: var(--titleColor);
+				}
+				.article-data {
+					display: flex;
+					justify-content: space-between;
+					width: 100%;
+					padding: 1rem 1rem 0;
+					color: var(--textColor);
+					p {
+						margin-bottom: 0.5rem;
+						font-size: 1.3rem;
+					}
+					.article-data-value {
+						color: var(--dataTextColor);
+					}
+					.infla-value {
+						font-size: 1.75rem;
+						font-weight: 700;
+						color: var(--inflaColor);
+					}
+					.infla,
+					.scale {
+						display: flex;
+						flex-direction: column;
+						justify-content: center;
+						text-align: center;
+						.scale-value {
+							font-size: 1.75rem;
+							color: var(--daysColor);
+						}
+					}
+				}
+				.tools {
+					display: flex;
+					.fa-solid {
+						margin: 0 1rem;
+						padding: 1rem;
+						font-size: 1.5rem;
+						color: var(--plusColor);
+					}
+				}
 			}
 		}
 	}
 }
+
 .new-article-popup {
+	display: flex;
+	justify-content: center;
+	height: 100vh;
 	padding: 2rem;
-	margin-top: 3rem;
-	background-color: var(--plusColor);
-	border-radius: 1rem;
+	background-color: var(--boxColor);
 	form {
 		.form-box {
 			display: flex;
@@ -111,6 +136,7 @@ ul {
 			align-items: center;
 			text-align: center;
 			margin: 1rem 0;
+			color: var(--titleColor);
 			label {
 				margin-bottom: 0.5rem;
 				font-size: 1.5rem;
@@ -118,11 +144,16 @@ ul {
 			input {
 				padding: 0.5rem;
 				margin-bottom: 0.5rem;
-				border-radius: 0.5rem;
+				width: 70%;
+				text-align: center;
+				border-radius: 1rem;
+				border: none;
 			}
 			.error-text {
-				visibility: hidden;
+				// visibility: hidden;
+				margin-top: 0.5rem;
 				font-size: 1.1rem;
+				color: var(--inflaColor);
 			}
 		}
 		.tools-btns {
