@@ -21,6 +21,14 @@ const checkDates = () => {
 	const date2 = new Date(endDate.value);
 	date1 <= date2 ? clearError(endDate) : showError(endDate);
 };
+const checkArtName = () => {
+	artName.value !== '' ? clearError(artName) : showError(artName);
+};
+const checkPrice = price => {
+	price.forEach(el => {
+		el.value !== '' ? clearError(el) : showError(el);
+	});
+};
 const actualDate = () => {
 	let now = new Date();
 	let day = now.getDate();
@@ -51,13 +59,27 @@ const showError = input => {
 };
 const clearError = input => {
 	errorMsg = input.nextElementSibling;
-	if (errorMsg.style.visibility === 'visible') {
-		errorMsg.style.visibility = 'hide';
-	}
+	errorMsg.style.visibility = 'hidden';
+};
+const checkError = input => {
+	let error = 0;
+	input.forEach(el => {
+		if (el.nextElementSibling.style.visibility === 'visible') {
+			error++;
+		}
+		if (error === 0) {
+			console.log('0 błędów');
+			panelsTogler();
+			inputsCleaner();
+		}
+	});
 };
 saveArtBtn.addEventListener('click', e => {
 	e.preventDefault();
 	checkDates();
+	checkArtName();
+	checkPrice([startPrice, endPrice]);
+	checkError([artName, startDate, startPrice, endDate, endPrice]);
 });
 abortArtBtn.addEventListener('click', e => {
 	e.preventDefault();
