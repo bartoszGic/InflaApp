@@ -7,66 +7,93 @@ const popup = document.querySelector('.new-article-popup');
 const container = document.querySelector('.container');
 const list = document.querySelector('.list');
 
-let artName = document.querySelector('#art-name');
-let startDate = document.querySelector('#start-date');
-let startPrice = document.querySelector('#start-price');
-let endDate = document.querySelector('#end-date');
-let endPrice = document.querySelector('#end-price');
+const artName = document.querySelector('#art-name');
+const startDate = document.querySelector('#start-date');
+const startPrice = document.querySelector('#start-price');
+const endDate = document.querySelector('#end-date');
+const endPrice = document.querySelector('#end-price');
 
-let artNameLi = document.querySelector('.name');
-let startDateLi = document.querySelector('.start-date');
-let startPriceLi = document.querySelector('.start-price');
-let endDateLi = document.querySelector('.actual-date');
-let endPriceLi = document.querySelector('.actual-price');
-
+let validationError = true;
 let artID = 0;
+let newArtCondition = true;
 
-const addNewArt = () => {
-	actualDate();
-	panelsTogler();
-};
-const createNewArt = (in1, in2, in3, in4, in5) => {
+const newArtCreator = async () => {
+	newArtCondition = true;
 	const newArt = document.createElement('li');
 	newArt.setAttribute('id', artID);
-	newArt.innerHTML = `<div class="name">${in1.value}</div>
+	newArt.setAttribute('active', '');
+	newArt.innerHTML = `<div class="name">${artName.value}</div>
 	<div class="article-data">
-		<div class="start-values">
-			<p>Start</p>
-			<p class="start-date article-data-value">${in2.value}</p>
-			<p>Cena</p>
-			<p class="start-price article-data-value">${in3.value}</p>
-		</div>
-		<div class="actual-values">
-			<p>Aktualizacja</p>
-			<p class="actual-date article-data-value">${in4.value}</p>
-			<p>Cena</p>
-			<p class="start-price article-data-value">${in5.value}</p>
-		</div>
+	<div class="start-values">
+	<p>Start</p>
+	<p class="start-date article-data-value">${startDate.value}</p>
+	<p>Cena</p>
+	<p class="start-price article-data-value">${startPrice.value}</p>
+	</div>
+	<div class="actual-values">
+	<p>Aktualizacja</p>
+	<p class="actual-date article-data-value">${endDate.value}</p>
+	<p>Cena</p>
+	<p class="start-price article-data-value">${endPrice.value}</p>
+	</div>
 		<div class="infla">
-			<p>Wartość</p>
-			<p class="infla-value article-data-value">15 %</p>
+		<p>Wartość</p>
+		<p class="infla-value article-data-value">15 %</p>
 		</div>
 		<div class="scale">
-			<p>Skala</p>
-			<p class="scale-value article-data-value">4 dni</p>
+		<p>Skala</p>
+		<p class="scale-value article-data-value">4 dni</p>
 		</div>
-	</div>
-	<div class="tools">
-		<button><i class="fa-solid fa-pen-to-square" onclick=editArt(${artID})></i></button>
-		<button><i class="fa-solid fa-trash"></i></button>
-	</div>`;
+		</div>
+		<div class="tools">
+		<button><i class="fa-solid fa-pen-to-square" onclick=editArtPanel(${artID})></i></button>
+		<button><i class="fa-solid fa-trash" onclick=deleteArt(${artID})></i></button>
+		</div>`;
 	list.append(newArt);
 	artID++;
 };
-const editArt = id => {
-	panelsTogler();
+const createNewArt = () => {
+	const createdArt = document.querySelector('[active]');
+	valueCalculator(createdArt);
+};
+const editArtPanel = id => {
+	newArtCondition = false;
+	panelsToggler();
 	const artToEdit = document.getElementById(id);
-	let artNameToEdit = artToEdit.children[0].textContent;
-	let startDateToEdit = artToEdit.children[1].children[0].children[1].textContent;
-	let startPriceToEdit = artToEdit.children[1].children[0].children[3].textContent;
-	let endDateToEdit = artToEdit.children[1].children[1].children[1].textContent;
-	let endPriceToEdit = artToEdit.children[1].children[1].children[3].textContent;
-	artName.value = artNameToEdit;
+	artToEdit.setAttribute('active', '');
+	artName.value = artToEdit.children[0].textContent;
+	startDate.value = artToEdit.children[1].children[0].children[1].textContent;
+	startPrice.value = artToEdit.children[1].children[0].children[3].textContent;
+	endDate.value = artToEdit.children[1].children[1].children[1].textContent;
+	endPrice.value = artToEdit.children[1].children[1].children[3].textContent;
+};
+const editArt = () => {
+	newArtCondition = true;
+	const editingArt = document.querySelector('[active]');
+	editingArt.children[0].textContent = artName.value;
+	editingArt.children[1].children[0].children[1].textContent = startDate.value;
+	editingArt.children[1].children[0].children[3].textContent = startPrice.value;
+	editingArt.children[1].children[1].children[1].textContent = endDate.value;
+	editingArt.children[1].children[1].children[3].textContent = endPrice.value;
+	valueCalculator(editingArt);
+};
+const valueCalculator = calculateArt => {
+	let difference = (((endPrice.value - startPrice.value) / startPrice.value) * 100).toFixed(1);
+	const valueText = calculateArt.querySelector('.infla-value');
+	valueText.textContent = `${difference} %`;
+	if (difference > 0) {
+		valueText.style.color = 'var(--inflaColor)';
+	} else if (parseFloat(difference) === 0) {
+		valueText.style.color = 'var(--neutralColor)';
+	} else if (difference < 0) {
+		valueText.style.color = 'var(--deflaColor)';
+	}
+	calculateArt.removeAttribute('active');
+};
+
+const deleteArt = id => {
+	const artToDelete = document.getElementById(id);
+	list.removeChild(artToDelete);
 };
 const checkDates = () => {
 	const date1 = new Date(startDate.value);
@@ -81,7 +108,7 @@ const checkPrice = price => {
 		el.value !== '' ? clearError(el) : showError(el);
 	});
 };
-const actualDate = () => {
+const showUpActualDate = () => {
 	let now = new Date();
 	let day = now.getDate();
 	let month = now.getMonth() + 1;
@@ -100,7 +127,7 @@ const actualDate = () => {
 // 		const year = oldFormatDate[i].value.slice(-10, -6);
 // 	}
 // };
-const panelsTogler = () => {
+const panelsToggler = () => {
 	if (popup.classList.contains('hide')) {
 		container.classList.add('hide');
 		popup.classList.remove('hide');
@@ -123,17 +150,9 @@ const clearError = input => {
 	errorMsg.style.visibility = 'hidden';
 };
 const checkError = input => {
-	let error = 0;
 	input.forEach(el => {
-		if (el.nextElementSibling.style.visibility === 'visible') {
-			error++;
-		}
+		el.nextElementSibling.style.visibility === 'visible' ? (validationError = true) : (validationError = false);
 	});
-	if (error === 0) {
-		createNewArt(artName, startDate, startPrice, endDate, endPrice);
-		panelsTogler();
-		inputsCleaner();
-	}
 };
 
 saveArtBtn.addEventListener('click', e => {
@@ -142,11 +161,25 @@ saveArtBtn.addEventListener('click', e => {
 	checkArtName();
 	checkPrice([startPrice, endPrice]);
 	checkError([artName, startDate, startPrice, endDate, endPrice]);
+	if (validationError === false && newArtCondition === true) {
+		newArtCreator();
+		createNewArt();
+		panelsToggler();
+		inputsCleaner();
+	} else if (validationError === false && newArtCondition === false) {
+		editArt();
+		panelsToggler();
+		inputsCleaner();
+	}
+	// newOrEditCondition===false?
 	// dateReverseConverter([startDate, endDate]);
 });
-abortArtBtn.addEventListener('click', e => {
+abortArtBtn.addEventListener('click', () => {
 	e.preventDefault();
-	panelsTogler();
+	panelsToggler();
 	inputsCleaner();
 });
-newArtBtn.addEventListener('click', addNewArt);
+newArtBtn.addEventListener('click', () => {
+	panelsToggler();
+	showUpActualDate();
+});
