@@ -16,6 +16,7 @@ html {
   --boxColor: rgba(40, 44, 41, 0.65);
   --inflaColor: rgb(228, 68, 68);
   --deflaColor: rgb(101, 224, 63);
+  --neutralColor: rgb(164, 184, 169);
   --textColor: #fff;
   --daysColor: #afc0ff;
   --inputColor: rgba(255, 255, 255, 0.85);
@@ -144,6 +145,13 @@ button:active {
 .container .container-shadow .list li .article-data p {
   margin-bottom: 0.5rem;
   font-size: 1.3rem;
+}
+.container .container-shadow .list li .article-data .prices {
+  position: relative;
+}
+.container .container-shadow .list li .article-data .prices .actual-price {
+  position: absolute;
+  bottom: 0;
 }
 .container .container-shadow .list li .article-data .article-data-value {
   color: var(--dataTextColor);

@@ -17,24 +17,24 @@ let validationError = true;
 let artID = 0;
 let newArtCondition = true;
 
-const newArtCreator = async () => {
+const newArtCreator = () => {
 	newArtCondition = true;
 	const newArt = document.createElement('li');
 	newArt.setAttribute('id', artID);
 	newArt.setAttribute('active', '');
 	newArt.innerHTML = `<div class="name">${artName.value}</div>
 	<div class="article-data">
-	<div class="start-values">
-	<p>Start</p>
+	<div class="dates">
+	<p>Od</p>
 	<p class="start-date article-data-value">${startDate.value}</p>
-	<p>Cena</p>
-	<p class="start-price article-data-value">${startPrice.value}</p>
-	</div>
-	<div class="actual-values">
-	<p>Aktualizacja</p>
+	<p>Do</p>
 	<p class="actual-date article-data-value">${endDate.value}</p>
-	<p>Cena</p>
-	<p class="start-price article-data-value">${endPrice.value}</p>
+	</div>
+	<div class="prices">
+	<p>Ceny</p>
+	<p class="start-price article-data-value">${startPrice.value}</p>
+	<p></p>
+	<p class="actual-price article-data-value">${endPrice.value}</p>
 	</div>
 		<div class="infla">
 		<p>Wartość</p>
@@ -54,7 +54,8 @@ const newArtCreator = async () => {
 };
 const createNewArt = () => {
 	const createdArt = document.querySelector('[active]');
-	valueCalculator(createdArt);
+	valuesCalculator(createdArt);
+	daysCalculator(createdArt);
 };
 const editArtPanel = id => {
 	newArtCondition = false;
@@ -63,8 +64,8 @@ const editArtPanel = id => {
 	artToEdit.setAttribute('active', '');
 	artName.value = artToEdit.children[0].textContent;
 	startDate.value = artToEdit.children[1].children[0].children[1].textContent;
-	startPrice.value = artToEdit.children[1].children[0].children[3].textContent;
-	endDate.value = artToEdit.children[1].children[1].children[1].textContent;
+	startPrice.value = artToEdit.children[1].children[1].children[1].textContent;
+	endDate.value = artToEdit.children[1].children[0].children[3].textContent;
 	endPrice.value = artToEdit.children[1].children[1].children[3].textContent;
 };
 const editArt = () => {
@@ -72,22 +73,30 @@ const editArt = () => {
 	const editingArt = document.querySelector('[active]');
 	editingArt.children[0].textContent = artName.value;
 	editingArt.children[1].children[0].children[1].textContent = startDate.value;
-	editingArt.children[1].children[0].children[3].textContent = startPrice.value;
-	editingArt.children[1].children[1].children[1].textContent = endDate.value;
+	editingArt.children[1].children[1].children[1].textContent = startPrice.value;
+	editingArt.children[1].children[0].children[3].textContent = endDate.value;
 	editingArt.children[1].children[1].children[3].textContent = endPrice.value;
-	valueCalculator(editingArt);
+	valuesCalculator(editingArt);
+	daysCalculator(editingArt);
 };
-const valueCalculator = calculateArt => {
-	let difference = (((endPrice.value - startPrice.value) / startPrice.value) * 100).toFixed(1);
-	const valueText = calculateArt.querySelector('.infla-value');
-	valueText.textContent = `${difference} %`;
+const valuesCalculator = calculateArt => {
+	const difference = (((endPrice.value - startPrice.value) / startPrice.value) * 100).toFixed(1);
+	const inflaText = calculateArt.querySelector('.infla-value');
+	inflaText.textContent = `${difference} %`;
 	if (difference > 0) {
-		valueText.style.color = 'var(--inflaColor)';
+		inflaText.style.color = 'var(--inflaColor)';
 	} else if (parseFloat(difference) === 0) {
-		valueText.style.color = 'var(--neutralColor)';
+		inflaText.style.color = 'var(--neutralColor)';
 	} else if (difference < 0) {
-		valueText.style.color = 'var(--deflaColor)';
+		inflaText.style.color = 'var(--deflaColor)';
 	}
+};
+const daysCalculator = calculateArt => {
+	const scaleText = calculateArt.querySelector('.scale-value');
+	const date1 = new Date(startDate.value);
+	const date2 = new Date(endDate.value);
+	const differenceDays = (date2.getTime() - date1.getTime()) / (1000 * 3600 * 24);
+	scaleText.textContent = `${differenceDays} dni`;
 	calculateArt.removeAttribute('active');
 };
 
@@ -109,10 +118,10 @@ const checkPrice = price => {
 	});
 };
 const showUpActualDate = () => {
-	let now = new Date();
-	let day = now.getDate();
-	let month = now.getMonth() + 1;
-	let year = now.getFullYear();
+	const now = new Date();
+	const day = now.getDate();
+	const month = now.getMonth() + 1;
+	const year = now.getFullYear();
 	if (month < 10) month = '0' + month;
 	if (day < 10) day = '0' + day;
 	startDate.value = `${year}-${month}-${day}`;
@@ -174,7 +183,7 @@ saveArtBtn.addEventListener('click', e => {
 	// newOrEditCondition===false?
 	// dateReverseConverter([startDate, endDate]);
 });
-abortArtBtn.addEventListener('click', () => {
+abortArtBtn.addEventListener('click', e => {
 	e.preventDefault();
 	panelsToggler();
 	inputsCleaner();

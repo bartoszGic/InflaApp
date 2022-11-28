@@ -96,6 +96,14 @@ button:active {
 						margin-bottom: 0.5rem;
 						font-size: 1.3rem;
 					}
+					.prices {
+						position: relative;
+						.actual-price {
+							position: absolute;
+							bottom: 0;
+						}
+					}
+
 					.article-data-value {
 						color: var(--dataTextColor);
 					}
