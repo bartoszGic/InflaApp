@@ -2,6 +2,7 @@ const newArtBtn = document.querySelector('.add-btn');
 const saveArtBtn = document.querySelector('.fa-square-check');
 const abortArtBtn = document.querySelector('.fa-xmark');
 const editBtns = document.getElementsByClassName('.fa-pen-to-square');
+const sortBtn = document.querySelector('#sort');
 
 const popup = document.querySelector('.new-article-popup');
 const container = document.querySelector('.container');
@@ -13,9 +14,47 @@ const startPrice = document.querySelector('#start-price');
 const endDate = document.querySelector('#end-date');
 const endPrice = document.querySelector('#end-price');
 
-let validationError = true;
+let err;
 let artID = 0;
 let newArtCondition = true;
+
+const sortFun = () => {
+	const option = sortBtn.value;
+	const oldElementsOrder = document.querySelectorAll('li');
+	const oldValuesOrder = [];
+	if (option === '2') {
+		oldElementsOrder.forEach(el => {
+			const valueNum = parseFloat(el.children[1].children[2].children[1].textContent.slice(0, -2));
+			oldValuesOrder.push(valueNum);
+		});
+		let newValuesOrder = oldValuesOrder.sort(compareValues);
+		list.innerHTML = '';
+		newValuesOrder.forEach(newValue => {
+			oldElementsOrder.forEach(oldElement => {
+				if (newValue === parseFloat(oldElement.children[1].children[2].children[1].textContent.slice(0, -2))) {
+					list.append(oldElement);
+				}
+			});
+		});
+	} else if (option === '1' || option === '0') {
+		oldElementsOrder.forEach(el => {
+			const valueNum = parseFloat(el.id);
+			oldValuesOrder.push(valueNum);
+		});
+		let newValuesOrder = oldValuesOrder.sort(compareValues).reverse();
+		list.innerHTML = '';
+		newValuesOrder.forEach(newValue => {
+			oldElementsOrder.forEach(oldElement => {
+				if (newValue === parseFloat(oldElement.id)) {
+					list.append(oldElement);
+				}
+			});
+		});
+	}
+};
+const compareValues = (a, b) => {
+	return b - a;
+};
 
 const newArtCreator = () => {
 	newArtCondition = true;
@@ -24,31 +63,27 @@ const newArtCreator = () => {
 	newArt.setAttribute('active', '');
 	newArt.innerHTML = `<div class="name">${artName.value}</div>
 	<div class="article-data">
-	<div class="dates">
-	<p>Od</p>
-	<p class="start-date article-data-value">${startDate.value}</p>
-	<p>Do</p>
-	<p class="actual-date article-data-value">${endDate.value}</p>
-	</div>
-	<div class="prices">
-	<p>Ceny</p>
-	<p class="start-price article-data-value">${startPrice.value}</p>
-	<p></p>
-	<p class="actual-price article-data-value">${endPrice.value}</p>
-	</div>
+		<div class="dates">
+			<p class="start-date article-data-value">Od <span>${startDate.value}</span></p>
+			<p class="actual-date article-data-value">Do <span>${endDate.value}</span></p>
+		</div>
+		<div class="prices">
+			<p class="start-price article-data-value">${startPrice.value} zł</p>
+			<p class="actual-price article-data-value">${endPrice.value} zł</p>
+		</div>
 		<div class="infla">
-		<p>Wartość</p>
-		<p class="infla-value article-data-value">15 %</p>
+			<p>Wartość</p>
+			<p class="infla-value article-data-value">15 %</p>
 		</div>
 		<div class="scale">
-		<p>Skala</p>
-		<p class="scale-value article-data-value">4 dni</p>
+			<p>Skala</p>
+			<p class="scale-value article-data-value">4 dni</p>
 		</div>
-		</div>
-		<div class="tools">
+	</div>
+	<div class="tools">
 		<button><i class="fa-solid fa-pen-to-square" onclick=editArtPanel(${artID})></i></button>
 		<button><i class="fa-solid fa-trash" onclick=deleteArt(${artID})></i></button>
-		</div>`;
+	</div>`;
 	list.append(newArt);
 	artID++;
 };
@@ -63,19 +98,19 @@ const editArtPanel = id => {
 	const artToEdit = document.getElementById(id);
 	artToEdit.setAttribute('active', '');
 	artName.value = artToEdit.children[0].textContent;
-	startDate.value = artToEdit.children[1].children[0].children[1].textContent;
-	startPrice.value = artToEdit.children[1].children[1].children[1].textContent;
-	endDate.value = artToEdit.children[1].children[0].children[3].textContent;
-	endPrice.value = artToEdit.children[1].children[1].children[3].textContent;
+	startDate.value = artToEdit.children[1].children[0].children[1].children[0].textContent;
+	startPrice.value = artToEdit.children[1].children[1].children[0].textContent;
+	endDate.value = artToEdit.children[1].children[0].children[1].children[0].textContent;
+	endPrice.value = artToEdit.children[1].children[1].children[1].textContent;
 };
 const editArt = () => {
 	newArtCondition = true;
 	const editingArt = document.querySelector('[active]');
 	editingArt.children[0].textContent = artName.value;
-	editingArt.children[1].children[0].children[1].textContent = startDate.value;
-	editingArt.children[1].children[1].children[1].textContent = startPrice.value;
-	editingArt.children[1].children[0].children[3].textContent = endDate.value;
-	editingArt.children[1].children[1].children[3].textContent = endPrice.value;
+	editingArt.children[1].children[0].children[1].children[0].textContent = startDate.value;
+	editingArt.children[1].children[1].children[0].textContent = startPrice.value;
+	editingArt.children[1].children[0].children[1].children[0].textContent = endDate.value;
+	editingArt.children[1].children[1].children[1].textContent = endPrice.value;
 	valuesCalculator(editingArt);
 	daysCalculator(editingArt);
 };
@@ -107,35 +142,27 @@ const deleteArt = id => {
 const checkDates = () => {
 	const date1 = new Date(startDate.value);
 	const date2 = new Date(endDate.value);
-	date1 <= date2 ? clearError(endDate) : showError(endDate);
+	date1 <= date2 ? clearError([endDate]) : showError(endDate);
 };
 const checkArtName = () => {
-	artName.value !== '' ? clearError(artName) : showError(artName);
+	artName.value !== '' ? clearError([artName]) : showError(artName);
 };
-const checkPrice = price => {
-	price.forEach(el => {
-		el.value !== '' ? clearError(el) : showError(el);
+const checkPrice = () => {
+	[startPrice, endPrice].forEach(el => {
+		el.value !== '' ? clearError([el]) : showError(el);
 	});
 };
 const showUpActualDate = () => {
 	const now = new Date();
-	const day = now.getDate();
-	const month = now.getMonth() + 1;
+	let day = now.getDate();
+	let month = now.getMonth() + 1;
 	const year = now.getFullYear();
 	if (month < 10) month = '0' + month;
 	if (day < 10) day = '0' + day;
 	startDate.value = `${year}-${month}-${day}`;
 	endDate.value = `${year}-${month}-${day}`;
 };
-// const dateReverseConverter = oldFormatDate => {
-// 	for (let i = 0; i < 2; i++) {
-// 		console.log(startDateLi.textContent);
-// 		startDateLi.textContent = `${oldFormatDate[i].value.slice(-2)}`;
-// 		const startDateLi = oldFormatDate[i].value.slice(-2);
-// 		const month = oldFormatDate[i].value.slice(-5, -3);
-// 		const year = oldFormatDate[i].value.slice(-10, -6);
-// 	}
-// };
+
 const panelsToggler = () => {
 	if (popup.classList.contains('hide')) {
 		container.classList.add('hide');
@@ -155,12 +182,16 @@ const showError = input => {
 	errorMsg.style.visibility = 'visible';
 };
 const clearError = input => {
-	errorMsg = input.nextElementSibling;
-	errorMsg.style.visibility = 'hidden';
+	input.forEach(el => {
+		el.nextElementSibling.style.visibility = 'hidden';
+	});
 };
 const checkError = input => {
+	err = 0;
 	input.forEach(el => {
-		el.nextElementSibling.style.visibility === 'visible' ? (validationError = true) : (validationError = false);
+		if (el.nextElementSibling.style.visibility === 'visible') {
+			err++;
+		}
 	});
 };
 
@@ -168,27 +199,29 @@ saveArtBtn.addEventListener('click', e => {
 	e.preventDefault();
 	checkDates();
 	checkArtName();
-	checkPrice([startPrice, endPrice]);
+	checkPrice();
 	checkError([artName, startDate, startPrice, endDate, endPrice]);
-	if (validationError === false && newArtCondition === true) {
+	if (err === 0 && newArtCondition === true) {
 		newArtCreator();
 		createNewArt();
+		sortFun();
 		panelsToggler();
 		inputsCleaner();
-	} else if (validationError === false && newArtCondition === false) {
+	} else if (err === 0 && newArtCondition === false) {
 		editArt();
+		sortFun();
 		panelsToggler();
 		inputsCleaner();
 	}
-	// newOrEditCondition===false?
-	// dateReverseConverter([startDate, endDate]);
 });
 abortArtBtn.addEventListener('click', e => {
 	e.preventDefault();
 	panelsToggler();
 	inputsCleaner();
+	clearError([artName, startDate, startPrice, endDate, endPrice]);
 });
 newArtBtn.addEventListener('click', () => {
 	panelsToggler();
 	showUpActualDate();
 });
+sortBtn.addEventListener('click', sortFun);

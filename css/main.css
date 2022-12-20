@@ -7,19 +7,19 @@
 
 html {
   font-size: 62.5%;
+  font-family: "Roboto", sans-serif;
 }
 
 :root {
-  --titleColor: #e7c444;
-  --plusColor: #eeafff;
-  --dataTextColor: rgb(164, 184, 169);
-  --boxColor: rgba(40, 44, 41, 0.65);
-  --inflaColor: rgb(228, 68, 68);
+  --bgColor: rgb(47, 72, 88);
+  --titleColor: rgb(134, 187, 216);
+  --plusColor: rgb(246, 174, 45);
+  --boxColor: rgb(23, 35, 43, 0.7);
+  --inflaColor: rgb(218, 38, 38);
   --deflaColor: rgb(101, 224, 63);
   --neutralColor: rgb(164, 184, 169);
-  --textColor: #fff;
-  --daysColor: #afc0ff;
-  --inputColor: rgba(255, 255, 255, 0.85);
+  --textColor: rgb(134, 187, 216);
+  --white: #ffff;
 }
 
 body {
@@ -33,10 +33,8 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background-image: url("../img/the-market-3147758_640.jpg");
-  background-attachment: fixed;
-  background-size: cover;
-  font-family: "Roboto", sans-serif;
+  height: 100vh;
+  background-color: var(--bgColor);
 }
 
 button {
@@ -54,20 +52,13 @@ button:active {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
   width: 100%;
 }
-.container .container-shadow {
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.35);
-}
-.container .container-shadow .top {
+.container .top {
+  position: fixed;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -78,23 +69,60 @@ button:active {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin-top: 3rem;
+  width: 100%;
+  padding-top: 1.5rem;
+  z-index: 1000;
+  background-image: -webkit-gradient(linear, left bottom, left top, from(#2f4858), color-stop(#446376), color-stop(#597f96), color-stop(#6f9cb6), to(#86bbd8));
+  background-image: linear-gradient(to top, #2f4858, #446376, #597f96, #6f9cb6, #86bbd8);
 }
-.container .container-shadow .top h1 {
+.container .top h1 {
   font-family: "Lexend Zetta", sans-serif;
-  font-size: 4rem;
+  font-size: 3rem;
   letter-spacing: 0.5rem;
-  color: var(--titleColor);
+  color: var(--bgColor);
 }
-.container .container-shadow .top h1 span {
-  color: var(--textColor);
+.container .top h1 span {
+  color: var(--white);
 }
-.container .container-shadow .top .add-btn {
-  margin: 1.5rem auto;
-  font-size: 5rem;
+.container .top .main-btns {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+}
+.container .top .main-btns button {
+  grid-column-start: 2;
+  margin: 0.5rem auto;
+  font-size: 4rem;
   color: var(--plusColor);
 }
-.container .container-shadow .list {
+.container .top .main-btns .sort-container {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-left: auto;
+  margin-right: 1rem;
+  background-color: var(--plusColor);
+  color: var(--bgColor);
+  border-radius: 0.7rem;
+}
+.container .top .main-btns .sort-container #sort {
+  width: 100%;
+  padding: 0.25rem 0.5rem;
+  font-weight: 700;
+  border: none;
+  color: var(--bgColor);
+  background-color: var(--plusColor);
+  border-radius: 0.5rem;
+}
+.container .list {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -105,9 +133,11 @@ button:active {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  margin-top: 11.25rem;
   list-style-type: none;
+  width: 95%;
 }
-.container .container-shadow .list li {
+.container .list li {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -118,20 +148,21 @@ button:active {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 95%;
-  margin: 0.5rem 0;
-  color: var(--plusColor);
+  width: 100%;
+  margin-bottom: 0.5rem;
   background-color: var(--boxColor);
   border-radius: 0.8rem;
 }
-.container .container-shadow .list li .name {
+.container .list li .name {
+  max-width: 90%;
   margin-top: 1rem;
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 700;
   letter-spacing: 0.2rem;
-  color: var(--titleColor);
+  color: var(--white);
+  overflow: hidden;
 }
-.container .container-shadow .list li .article-data {
+.container .list li .article-data {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -140,29 +171,32 @@ button:active {
           justify-content: space-between;
   width: 100%;
   padding: 1rem 1rem 0;
+  color: var(--neutralColor);
+}
+.container .list li .article-data p {
+  margin-top: 0.5rem;
+}
+.container .list li .article-data .dates p {
+  font-size: 1rem;
+}
+.container .list li .article-data .dates p span {
+  margin-left: 0.5rem;
+  font-size: 1.3rem;
   color: var(--textColor);
 }
-.container .container-shadow .list li .article-data p {
-  margin-bottom: 0.5rem;
+.container .list li .article-data .prices p {
+  color: var(--textColor);
+}
+.container .list li .article-data .article-data-value {
   font-size: 1.3rem;
 }
-.container .container-shadow .list li .article-data .prices {
-  position: relative;
-}
-.container .container-shadow .list li .article-data .prices .actual-price {
-  position: absolute;
-  bottom: 0;
-}
-.container .container-shadow .list li .article-data .article-data-value {
-  color: var(--dataTextColor);
-}
-.container .container-shadow .list li .article-data .infla-value {
+.container .list li .article-data .infla-value {
   font-size: 1.75rem;
   font-weight: 700;
   color: var(--inflaColor);
 }
-.container .container-shadow .list li .article-data .infla,
-.container .container-shadow .list li .article-data .scale {
+.container .list li .article-data .infla,
+.container .list li .article-data .scale {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -175,17 +209,17 @@ button:active {
           justify-content: center;
   text-align: center;
 }
-.container .container-shadow .list li .article-data .infla .scale-value,
-.container .container-shadow .list li .article-data .scale .scale-value {
+.container .list li .article-data .infla .scale-value,
+.container .list li .article-data .scale .scale-value {
   font-size: 1.75rem;
-  color: var(--daysColor);
+  color: var(--white);
 }
-.container .container-shadow .list li .tools {
+.container .list li .tools {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
-.container .container-shadow .list li .tools .fa-solid {
+.container .list li .tools button {
   margin: 0 1rem;
   padding: 1rem;
   font-size: 1.5rem;
@@ -200,9 +234,8 @@ button:active {
       -ms-flex-pack: center;
           justify-content: center;
   height: 100vh;
-  width: 100vh;
+  width: 100%;
   padding: 2rem;
-  background-color: var(--boxColor);
 }
 .new-article-popup form .form-box {
   display: -webkit-box;
@@ -227,15 +260,16 @@ button:active {
   padding: 0.5rem;
   margin-bottom: 0.5rem;
   width: 90%;
+  font-family: "Roboto", sans-serif;
   text-align: center;
-  background-color: var(--inputColor);
   border-radius: 1rem;
   border: none;
 }
 .new-article-popup form .form-box .error-text {
   visibility: hidden;
   margin-top: 0.5rem;
-  font-size: 1.1rem;
+  font-size: 1.25rem;
+  text-shadow: 0.1rem 0.1rem var(--boxColor);
   color: var(--inflaColor);
 }
 .new-article-popup form .tools-btns {
@@ -260,6 +294,8 @@ button:active {
 
 .hide {
   display: none;
+  -webkit-transition: display 0.3s;
+  transition: display 0.3s;
 }
 
 @-webkit-keyframes btnAnimation {
@@ -292,11 +328,41 @@ button:active {
   }
 }
 @media (min-width: 576px) {
-  body {
-    background-image: url("../img/the-market-3147758_1920.jpg");
+  .container .top h1 {
+    font-size: 7rem;
   }
-  .container,
-.new-article-popup {
+  .container .top .main-btns button {
+    font-size: 7rem;
+  }
+  .container .top .main-btns .sort-container {
+    margin-left: 0;
+    margin-right: auto;
+  }
+  .container .list {
+    max-width: 529px;
+    margin-top: 20rem;
+  }
+  .container .list li {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+  .container .list li .article-data p {
+    font-size: 1.5rem;
+  }
+  .container .list li .article-data .dates p {
+    font-size: 1.5rem;
+  }
+  .container .list li .article-data .dates p span {
+    font-size: 2rem;
+  }
+  .container .list li .article-data .article-data-value {
+    font-size: 2rem;
+  }
+  .container .list li .tools button {
+    margin: 0 2rem;
+    font-size: 2.5rem;
+  }
+  .new-article-popup {
     width: 559px;
   }
 }/*# sourceMappingURL=main.css.map */

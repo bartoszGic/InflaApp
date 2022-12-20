@@ -15,17 +15,102 @@
 </head>
 
 <body>
-
     <div class="container">
-        <div class="container-shadow">
-            <div class="top">
-                <h1>Infl<span>App</span></h1>
+        <div class="top">
+            <h1>Infl<span>App</span></h1>
+            <div class="main-btns">
                 <button><i class="add-btn fa-solid fa-plus"></i></button>
+                <!-- <button><i class="fa-solid fa-sort-down"></i></button> -->
+                <div class="sort-container">
+                    <select id="sort"></i>
+                        <option value="0" disabled autofocus>Sortuj:</option>
+                        <option value="1">Domyślne</option>
+                        <option value="2">Wielkość</option>
+                    </select>
+
+                </div>
             </div>
-            <ul class="list">
-            </ul>
         </div>
+        <ul class="list">
+            <!-- <li id="0">
+                <div class="name">test1</div>
+                <div class="article-data">
+                    <div class="dates">
+                        <p class="start-date article-data-value">Od <span>2022-12-20</span></p>
+                        <p class="actual-date article-data-value">Do <span>2022-12-20</span></p>
+                    </div>
+                    <div class="prices">
+                        <p class="start-price article-data-value">0.01 zł</p>
+                        <p class="actual-price article-data-value">0.01 zł</p>
+                    </div>
+                    <div class="infla">
+                        <p>Wartość</p>
+                        <p class="infla-value article-data-value" style="color: var(--neutralColor);">0.0 %</p>
+                    </div>
+                    <div class="scale">
+                        <p>Skala</p>
+                        <p class="scale-value article-data-value">0 dni</p>
+                    </div>
+                </div>
+                <div class="tools">
+                    <button><i class="fa-solid fa-pen-to-square" onclick="editArtPanel(0)"></i></button>
+                    <button><i class="fa-solid fa-trash" onclick="deleteArt(0)"></i></button>
+                </div>
+            </li>
+            <li id="1">
+                <div class="name">test2</div>
+                <div class="article-data">
+                    <div class="dates">
+                        <p class="start-date article-data-value">Od <span>2022-12-20</span></p>
+                        <p class="actual-date article-data-value">Do <span>2022-12-20</span></p>
+                    </div>
+                    <div class="prices">
+                        <p class="start-price article-data-value">2.01 zł</p>
+                        <p class="actual-price article-data-value">3.01 zł</p>
+                    </div>
+                    <div class="infla">
+                        <p>Wartość</p>
+                        <p class="infla-value article-data-value" style="color: var(--inflaColor);">49.8 %</p>
+                    </div>
+                    <div class="scale">
+                        <p>Skala</p>
+                        <p class="scale-value article-data-value">0 dni</p>
+                    </div>
+                </div>
+                <div class="tools">
+                    <button><i class="fa-solid fa-pen-to-square" onclick="editArtPanel(1)"></i></button>
+                    <button><i class="fa-solid fa-trash" onclick="deleteArt(1)"></i></button>
+                </div>
+            </li>
+            <li id="2">
+                <div class="name">test3</div>
+                <div class="article-data">
+                    <div class="dates">
+                        <p class="start-date article-data-value">Od <span>2022-12-20</span></p>
+                        <p class="actual-date article-data-value">Do <span>2022-12-20</span></p>
+                    </div>
+                    <div class="prices">
+                        <p class="start-price article-data-value">2.01 zł</p>
+                        <p class="actual-price article-data-value">1.01 zł</p>
+                    </div>
+                    <div class="infla">
+                        <p>Wartość</p>
+                        <p class="infla-value article-data-value" style="color: var(--deflaColor);">-49.8 %</p>
+                    </div>
+                    <div class="scale">
+                        <p>Skala</p>
+                        <p class="scale-value article-data-value">0 dni</p>
+                    </div>
+                </div>
+                <div class="tools">
+                    <button><i class="fa-solid fa-pen-to-square" onclick="editArtPanel(2)"></i></button>
+                    <button><i class="fa-solid fa-trash" onclick="deleteArt(2)"></i></button>
+                </div>
+            </li> -->
+        </ul>
     </div>
+
+
     <div class="new-article-popup hide">
         <form autocomplete="off">
             <div class="form-box">

@@ -5,27 +5,25 @@
 }
 html {
 	font-size: 62.5%;
+	font-family: 'Roboto', sans-serif;
 }
 :root {
-	--titleColor: #e7c444;
-	--plusColor: #eeafff;
-	--dataTextColor: rgb(164, 184, 169);
-	--boxColor: rgba(40, 44, 41, 0.65);
-	--inflaColor: rgb(228, 68, 68);
+	--bgColor: rgb(47, 72, 88);
+	--titleColor: rgb(134, 187, 216);
+	--plusColor: rgb(246, 174, 45);
+	--boxColor: rgb(23, 35, 43, 0.7);
+	--inflaColor: rgb(218, 38, 38);
 	--deflaColor: rgb(101, 224, 63);
 	--neutralColor: rgb(164, 184, 169);
-	--textColor: #fff;
-	--daysColor: #afc0ff;
-	--inputColor: rgba(255, 255, 255, 0.85);
+	--textColor: rgb(134, 187, 216);
+	--white: #ffff;
 }
 body {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	background-image: url('../img/the-market-3147758_640.jpg');
-	background-attachment: fixed;
-	background-size: cover;
-	font-family: 'Roboto', sans-serif;
+	height: 100vh;
+	background-color: var(--bgColor);
 }
 
 button {
@@ -36,102 +34,137 @@ button {
 button:active {
 	animation: btnAnimation 0.2s;
 }
-
 .container {
 	display: flex;
-	flex-direction: column;
 	justify-content: center;
 	width: 100%;
-	.container-shadow {
-		height: 100vh;
-		background-color: rgba(0, 0, 0, 0.35);
-		.top {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			margin-top: 3rem;
-			h1 {
-				font-family: 'Lexend Zetta', sans-serif;
-				font-size: 4rem;
-				letter-spacing: 0.5rem;
-				color: var(--titleColor);
-				span {
-					color: var(--textColor);
-				}
-			}
-			.add-btn {
-				margin: 1.5rem auto;
-				font-size: 5rem;
-				color: var(--plusColor);
+	.top {
+		position: fixed;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 100%;
+		padding-top: 1.5rem;
+		z-index: 1000;
+		background-image: linear-gradient(to top, #2f4858, #446376, #597f96, #6f9cb6, #86bbd8);
+		h1 {
+			font-family: 'Lexend Zetta', sans-serif;
+			font-size: 3rem;
+			letter-spacing: 0.5rem;
+			color: var(--bgColor);
+			span {
+				color: var(--white);
 			}
 		}
-		.list {
+		.main-btns {
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr;
+			justify-items: center;
+			align-items: center;
+			width: 100%;
+			button {
+				grid-column-start: 2;
+				margin: 0.5rem auto;
+				font-size: 4rem;
+				color: var(--plusColor);
+			}
+			.sort-container {
+				position: relative;
+				display: flex;
+				justify-content: center;
+				margin-left: auto;
+				margin-right: 1rem;
+				background-color: var(--plusColor);
+				color: var(--bgColor);
+				border-radius: 0.7rem;
+				#sort {
+					width: 100%;
+					padding: 0.25rem 0.5rem;
+					font-weight: 700;
+					border: none;
+					color: var(--bgColor);
+					background-color: var(--plusColor);
+					border-radius: 0.5rem;
+				}
+			}
+		}
+	}
+
+	.list {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-top: 11.25rem;
+		list-style-type: none;
+		width: 95%;
+		li {
 			display: flex;
 			flex-direction: column;
 			align-items: center;
-			list-style-type: none;
-			li {
+			width: 100%;
+			margin-bottom: 0.5rem;
+			background-color: var(--boxColor);
+			border-radius: 0.8rem;
+			.name {
+				max-width: 90%;
+				margin-top: 1rem;
+				font-size: 2rem;
+				font-weight: 700;
+				letter-spacing: 0.2rem;
+				color: var(--white);
+				overflow: hidden;
+			}
+			.article-data {
 				display: flex;
-				flex-direction: column;
-				align-items: center;
-				width: 95%;
-				margin: 0.5rem 0;
-				color: var(--plusColor);
-				background-color: var(--boxColor);
-				border-radius: 0.8rem;
-				.name {
-					margin-top: 1rem;
-					font-size: 1.5rem;
-					font-weight: 700;
-					letter-spacing: 0.2rem;
-					color: var(--titleColor);
+				justify-content: space-between;
+				width: 100%;
+				padding: 1rem 1rem 0;
+				color: var(--neutralColor);
+				p {
+					margin-top: 0.5rem;
 				}
-				.article-data {
-					display: flex;
-					justify-content: space-between;
-					width: 100%;
-					padding: 1rem 1rem 0;
-					color: var(--textColor);
+				.dates {
 					p {
-						margin-bottom: 0.5rem;
-						font-size: 1.3rem;
-					}
-					.prices {
-						position: relative;
-						.actual-price {
-							position: absolute;
-							bottom: 0;
-						}
-					}
-
-					.article-data-value {
-						color: var(--dataTextColor);
-					}
-					.infla-value {
-						font-size: 1.75rem;
-						font-weight: 700;
-						color: var(--inflaColor);
-					}
-					.infla,
-					.scale {
-						display: flex;
-						flex-direction: column;
-						justify-content: center;
-						text-align: center;
-						.scale-value {
-							font-size: 1.75rem;
-							color: var(--daysColor);
+						font-size: 1rem;
+						span {
+							margin-left: 0.5rem;
+							font-size: 1.3rem;
+							color: var(--textColor);
 						}
 					}
 				}
-				.tools {
-					display: flex;
-					.fa-solid {
-						margin: 0 1rem;
-						padding: 1rem;
-						font-size: 1.5rem;
-						color: var(--plusColor);
+				.prices {
+					p {
+						color: var(--textColor);
 					}
+				}
+				.article-data-value {
+					font-size: 1.3rem;
+				}
+				.infla-value {
+					font-size: 1.75rem;
+					font-weight: 700;
+					color: var(--inflaColor);
+				}
+				.infla,
+				.scale {
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					text-align: center;
+					.scale-value {
+						font-size: 1.75rem;
+						color: var(--white);
+					}
+				}
+			}
+			.tools {
+				display: flex;
+				button {
+					margin: 0 1rem;
+					padding: 1rem;
+					font-size: 1.5rem;
+					color: var(--plusColor);
 				}
 			}
 		}
@@ -142,9 +175,8 @@ button:active {
 	display: flex;
 	justify-content: center;
 	height: 100vh;
-	width: 100vh;
+	width: 100%;
 	padding: 2rem;
-	background-color: var(--boxColor);
 	form {
 		.form-box {
 			display: flex;
@@ -161,15 +193,16 @@ button:active {
 				padding: 0.5rem;
 				margin-bottom: 0.5rem;
 				width: 90%;
+				font-family: 'Roboto', sans-serif;
 				text-align: center;
-				background-color: var(--inputColor);
 				border-radius: 1rem;
 				border: none;
 			}
 			.error-text {
 				visibility: hidden;
 				margin-top: 0.5rem;
-				font-size: 1.1rem;
+				font-size: 1.25rem;
+				text-shadow: 0.1rem 0.1rem var(--boxColor);
 				color: var(--inflaColor);
 			}
 		}
@@ -192,6 +225,8 @@ button:active {
 }
 .hide {
 	display: none;
+
+	transition: display 0.3s;
 }
 @keyframes btnAnimation {
 	0% {
@@ -205,10 +240,54 @@ button:active {
 	}
 }
 @media (min-width: 576px) {
-	body {
-		background-image: url('../img/the-market-3147758_1920.jpg');
+	.container {
+		.top {
+			h1 {
+				font-size: 7rem;
+			}
+			.main-btns {
+				button {
+					font-size: 7rem;
+				}
+				.sort-container {
+					margin-left: 0;
+					margin-right: auto;
+				}
+			}
+		}
+		.list {
+			max-width: 529px;
+			margin-top: 20rem;
+			li {
+				padding-left: 3rem;
+				padding-right: 3rem;
+
+				.article-data {
+					p {
+						font-size: 1.5rem;
+					}
+					.dates {
+						p {
+							font-size: 1.5rem;
+							span {
+								font-size: 2rem;
+							}
+						}
+					}
+					.article-data-value {
+						font-size: 2rem;
+					}
+				}
+				.tools {
+					button {
+						margin: 0 2rem;
+						font-size: 2.5rem;
+					}
+				}
+			}
+		}
 	}
-	.container,
+
 	.new-article-popup {
 		width: 559px;
 	}
