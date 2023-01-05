@@ -41,6 +41,8 @@ button {
   background-color: transparent;
   border: none;
   cursor: pointer;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
 }
 
 button:active {
@@ -96,7 +98,7 @@ button:active {
 .container .top .main-btns button {
   grid-column-start: 2;
   margin: 0.5rem auto;
-  font-size: 4rem;
+  font-size: 6rem;
   color: var(--plusColor);
 }
 .container .top .main-btns .sort-container {
@@ -107,6 +109,8 @@ button:active {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  height: 3rem;
+  width: 10rem;
   margin-left: auto;
   margin-right: 1rem;
   background-color: var(--plusColor);

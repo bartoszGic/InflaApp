@@ -30,6 +30,7 @@ button {
 	background-color: transparent;
 	border: none;
 	cursor: pointer;
+	transition: 0.5s;
 }
 button:active {
 	animation: btnAnimation 0.2s;
@@ -65,13 +66,15 @@ button:active {
 			button {
 				grid-column-start: 2;
 				margin: 0.5rem auto;
-				font-size: 4rem;
+				font-size: 6rem;
 				color: var(--plusColor);
 			}
 			.sort-container {
 				position: relative;
 				display: flex;
 				justify-content: center;
+				height: 3rem;
+				width: 10rem;
 				margin-left: auto;
 				margin-right: 1rem;
 				background-color: var(--plusColor);
@@ -237,6 +240,7 @@ button:active {
 		transform: scale(1);
 	}
 }
+
 @media (min-width: 576px) {
 	.container {
 		.top {
