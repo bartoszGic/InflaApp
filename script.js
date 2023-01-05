@@ -163,11 +163,25 @@ const sortFun = () => {
 	const option = sortBtn.value;
 	const oldElementsOrder = document.querySelectorAll('li');
 	const oldValuesOrder = [];
-	if (option === '2') {
-		oldElementsOrder.forEach(el => {
-			const valueNum = parseFloat(el.children[1].children[2].children[1].textContent.slice(0, -2));
+	if (option === '1') {
+		for (let i = 0; i < oldElementsOrder.length; i++) {
+			let valueNum = parseFloat(oldElementsOrder[i].id);
 			oldValuesOrder.push(valueNum);
+		}
+		let newValuesOrder = oldValuesOrder.sort(compareValues).reverse();
+		list.innerHTML = '';
+		newValuesOrder.forEach(newValue => {
+			oldElementsOrder.forEach(oldElement => {
+				if (newValue === parseFloat(oldElement.id)) {
+					list.append(oldElement);
+				}
+			});
 		});
+	} else if (option === '2') {
+		for (let i = 0; i < oldElementsOrder.length; i++) {
+			let valueNum = parseFloat(oldElementsOrder[i].children[1].children[2].children[1].textContent.slice(0, -2));
+			oldValuesOrder.push(valueNum);
+		}
 		let newValuesOrder = oldValuesOrder.sort(compareValues);
 		list.innerHTML = '';
 		newValuesOrder.forEach(newValue => {
@@ -177,16 +191,16 @@ const sortFun = () => {
 				}
 			});
 		});
-	} else if (option === '1' || option === '0') {
-		oldElementsOrder.forEach(el => {
-			const valueNum = parseFloat(el.id);
+	} else if (option === '3') {
+		for (let i = 0; i < oldElementsOrder.length; i++) {
+			let valueNum = parseFloat(oldElementsOrder[i].children[1].children[3].children[1].textContent.slice(0, -4));
 			oldValuesOrder.push(valueNum);
-		});
-		let newValuesOrder = oldValuesOrder.sort(compareValues).reverse();
+		}
+		let newValuesOrder = oldValuesOrder.sort(compareValues);
 		list.innerHTML = '';
 		newValuesOrder.forEach(newValue => {
 			oldElementsOrder.forEach(oldElement => {
-				if (newValue === parseFloat(oldElement.id)) {
+				if (newValue === parseFloat(oldElement.children[1].children[3].children[1].textContent.slice(0, -4))) {
 					list.append(oldElement);
 				}
 			});
