@@ -294,8 +294,6 @@ button:active {
 
 .hide {
   display: none;
-  -webkit-transition: display 0.3s;
-  transition: display 0.3s;
 }
 
 @-webkit-keyframes btnAnimation {

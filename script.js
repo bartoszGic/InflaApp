@@ -18,44 +18,6 @@ let err;
 let artID = 0;
 let newArtCondition = true;
 
-const sortFun = () => {
-	const option = sortBtn.value;
-	const oldElementsOrder = document.querySelectorAll('li');
-	const oldValuesOrder = [];
-	if (option === '2') {
-		oldElementsOrder.forEach(el => {
-			const valueNum = parseFloat(el.children[1].children[2].children[1].textContent.slice(0, -2));
-			oldValuesOrder.push(valueNum);
-		});
-		let newValuesOrder = oldValuesOrder.sort(compareValues);
-		list.innerHTML = '';
-		newValuesOrder.forEach(newValue => {
-			oldElementsOrder.forEach(oldElement => {
-				if (newValue === parseFloat(oldElement.children[1].children[2].children[1].textContent.slice(0, -2))) {
-					list.append(oldElement);
-				}
-			});
-		});
-	} else if (option === '1' || option === '0') {
-		oldElementsOrder.forEach(el => {
-			const valueNum = parseFloat(el.id);
-			oldValuesOrder.push(valueNum);
-		});
-		let newValuesOrder = oldValuesOrder.sort(compareValues).reverse();
-		list.innerHTML = '';
-		newValuesOrder.forEach(newValue => {
-			oldElementsOrder.forEach(oldElement => {
-				if (newValue === parseFloat(oldElement.id)) {
-					list.append(oldElement);
-				}
-			});
-		});
-	}
-};
-const compareValues = (a, b) => {
-	return b - a;
-};
-
 const newArtCreator = () => {
 	newArtCondition = true;
 	const newArt = document.createElement('li');
@@ -68,8 +30,8 @@ const newArtCreator = () => {
 			<p class="actual-date article-data-value">Do <span>${endDate.value}</span></p>
 		</div>
 		<div class="prices">
-			<p class="start-price article-data-value">${startPrice.value} zł</p>
-			<p class="actual-price article-data-value">${endPrice.value} zł</p>
+			<p class="start-price article-data-value"><span>${startPrice.value}</span> zł</p>
+			<p class="actual-price article-data-value"><span>${endPrice.value}</span> zł</p>
 		</div>
 		<div class="infla">
 			<p>Wartość</p>
@@ -98,19 +60,19 @@ const editArtPanel = id => {
 	const artToEdit = document.getElementById(id);
 	artToEdit.setAttribute('active', '');
 	artName.value = artToEdit.children[0].textContent;
-	startDate.value = artToEdit.children[1].children[0].children[1].children[0].textContent;
-	startPrice.value = artToEdit.children[1].children[1].children[0].textContent;
+	startDate.value = artToEdit.children[1].children[0].children[0].children[0].textContent;
+	startPrice.value = artToEdit.children[1].children[1].children[0].children[0].textContent;
 	endDate.value = artToEdit.children[1].children[0].children[1].children[0].textContent;
-	endPrice.value = artToEdit.children[1].children[1].children[1].textContent;
+	endPrice.value = artToEdit.children[1].children[1].children[1].children[0].textContent;
 };
 const editArt = () => {
 	newArtCondition = true;
 	const editingArt = document.querySelector('[active]');
 	editingArt.children[0].textContent = artName.value;
-	editingArt.children[1].children[0].children[1].children[0].textContent = startDate.value;
-	editingArt.children[1].children[1].children[0].textContent = startPrice.value;
+	editingArt.children[1].children[0].children[0].children[0].textContent = startDate.value;
+	editingArt.children[1].children[1].children[0].children[0].textContent = startPrice.value;
 	editingArt.children[1].children[0].children[1].children[0].textContent = endDate.value;
-	editingArt.children[1].children[1].children[1].textContent = endPrice.value;
+	editingArt.children[1].children[1].children[1].children[0].textContent = endPrice.value;
 	valuesCalculator(editingArt);
 	daysCalculator(editingArt);
 };
@@ -194,9 +156,44 @@ const checkError = input => {
 		}
 	});
 };
-
-saveArtBtn.addEventListener('click', e => {
-	e.preventDefault();
+const compareValues = (a, b) => {
+	return b - a;
+};
+const sortFun = () => {
+	const option = sortBtn.value;
+	const oldElementsOrder = document.querySelectorAll('li');
+	const oldValuesOrder = [];
+	if (option === '2') {
+		oldElementsOrder.forEach(el => {
+			const valueNum = parseFloat(el.children[1].children[2].children[1].textContent.slice(0, -2));
+			oldValuesOrder.push(valueNum);
+		});
+		let newValuesOrder = oldValuesOrder.sort(compareValues);
+		list.innerHTML = '';
+		newValuesOrder.forEach(newValue => {
+			oldElementsOrder.forEach(oldElement => {
+				if (newValue === parseFloat(oldElement.children[1].children[2].children[1].textContent.slice(0, -2))) {
+					list.append(oldElement);
+				}
+			});
+		});
+	} else if (option === '1' || option === '0') {
+		oldElementsOrder.forEach(el => {
+			const valueNum = parseFloat(el.id);
+			oldValuesOrder.push(valueNum);
+		});
+		let newValuesOrder = oldValuesOrder.sort(compareValues).reverse();
+		list.innerHTML = '';
+		newValuesOrder.forEach(newValue => {
+			oldElementsOrder.forEach(oldElement => {
+				if (newValue === parseFloat(oldElement.id)) {
+					list.append(oldElement);
+				}
+			});
+		});
+	}
+};
+const mainFun = () => {
 	checkDates();
 	checkArtName();
 	checkPrice();
@@ -213,6 +210,18 @@ saveArtBtn.addEventListener('click', e => {
 		panelsToggler();
 		inputsCleaner();
 	}
+};
+window.addEventListener('keyup', e => {
+	if (e.key === 'Enter' && !popup.classList.contains('hide')) {
+		mainFun();
+	} else if (e.key === 'Enter' && popup.classList.contains('hide')) {
+		panelsToggler();
+		showUpActualDate();
+	}
+});
+saveArtBtn.addEventListener('click', e => {
+	e.preventDefault();
+	mainFun();
 });
 abortArtBtn.addEventListener('click', e => {
 	e.preventDefault();
