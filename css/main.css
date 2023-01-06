@@ -271,9 +271,7 @@ button:active {
   border: none;
 }
 .new-article-popup form .form-box #start-date,
-.new-article-popup form .form-box #end-date,
-.new-article-popup form .form-box #start-price,
-.new-article-popup form .form-box #end-price {
+.new-article-popup form .form-box #end-date {
   padding-left: 2.2rem;
 }
 .new-article-popup form .form-box .error-text {
