@@ -238,8 +238,6 @@ button:active {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  height: 100vh;
-  width: 100%;
   padding: 2rem;
 }
 .new-article-popup form .form-box {
@@ -273,6 +271,9 @@ button:active {
 .new-article-popup form .form-box #start-date,
 .new-article-popup form .form-box #end-date {
   padding-left: 2.2rem;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
 }
 .new-article-popup form .form-box .error-text {
   visibility: hidden;
