@@ -81,6 +81,7 @@ button:active {
 				color: var(--bgColor);
 				border-radius: 0.7rem;
 				#sort {
+					display: flex;
 					width: 100%;
 					padding: 0.25rem 0.5rem;
 					font-weight: 700;
@@ -90,6 +91,9 @@ button:active {
 					background-color: var(--plusColor);
 					border-radius: 0.5rem;
 					appearance: none;
+					option {
+						font-weight: 700;
+					}
 				}
 			}
 		}

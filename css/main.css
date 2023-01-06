@@ -118,6 +118,9 @@ button:active {
   border-radius: 0.7rem;
 }
 .container .top .main-btns .sort-container #sort {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   width: 100%;
   padding: 0.25rem 0.5rem;
   font-weight: 700;
@@ -129,6 +132,9 @@ button:active {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
+}
+.container .top .main-btns .sort-container #sort option {
+  font-weight: 700;
 }
 .container .list {
   display: -webkit-box;
