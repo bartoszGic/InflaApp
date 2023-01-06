@@ -270,13 +270,11 @@ button:active {
   border-radius: 1rem;
   border: none;
 }
-.new-article-popup form .form-box ::-webkit-inner-spin-button {
-  display: none;
-  -webkit-appearance: none;
-}
-.new-article-popup form .form-box ::-webkit-calendar-picker-indicator {
-  -webkit-appearance: none;
-  display: none;
+.new-article-popup form .form-box #start-date,
+.new-article-popup form .form-box #end-date,
+.new-article-popup form .form-box #start-price,
+.new-article-popup form .form-box #end-price {
+  padding-left: 2.2rem;
 }
 .new-article-popup form .form-box .error-text {
   visibility: hidden;

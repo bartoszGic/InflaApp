@@ -202,14 +202,16 @@ button:active {
 				border-radius: 1rem;
 				border: none;
 			}
-			::-webkit-inner-spin-button {
-				display: none;
-				-webkit-appearance: none;
+			#start-date,
+			#end-date,
+			#start-price,
+			#end-price {
+				padding-left: 2.2rem;
 			}
-			::-webkit-calendar-picker-indicator {
-				-webkit-appearance: none;
-				display: none;
-			}
+			// ::-webkit-calendar-picker-indicator {
+			// 	// -webkit-appearance: none;
+			// 	// display: none;
+			// }
 			.error-text {
 				visibility: hidden;
 				margin-top: 0.5rem;
