@@ -84,10 +84,12 @@ button:active {
 					width: 100%;
 					padding: 0.25rem 0.5rem;
 					font-weight: 700;
+					text-align: center;
 					border: none;
 					color: var(--bgColor);
 					background-color: var(--plusColor);
 					border-radius: 0.5rem;
+					appearance: none;
 				}
 			}
 		}
