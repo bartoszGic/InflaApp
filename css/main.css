@@ -137,7 +137,7 @@ button:active {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin-top: 11.25rem;
+  margin-top: 13.5rem;
   list-style-type: none;
   width: 95%;
 }
@@ -216,6 +216,7 @@ button:active {
 .container .list li .article-data .infla .scale-value,
 .container .list li .article-data .scale .scale-value {
   font-size: 1.75rem;
+  font-weight: 700;
   color: var(--white);
 }
 .container .list li .tools {
@@ -252,7 +253,6 @@ button:active {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  text-align: center;
   margin: 1rem 0;
   color: var(--titleColor);
 }
@@ -261,6 +261,7 @@ button:active {
   font-size: 1.5rem;
 }
 .new-article-popup form .form-box input {
+  display: block;
   padding: 0.5rem;
   margin-bottom: 0.5rem;
   width: 90%;
