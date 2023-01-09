@@ -23,7 +23,7 @@ const newArtCreator = () => {
 	const newArt = document.createElement('li');
 	newArt.setAttribute('id', artID);
 	newArt.setAttribute('active', '');
-	newArt.innerHTML = `<div class="name">${artName.value}</div>
+	const newArtInner = `<div class="name">${artName.value}</div>
 	<div class="article-data">
 		<div class="dates">
 			<p class="start-date article-data-value">Od <span>${startDate.value}</span></p>
@@ -46,6 +46,7 @@ const newArtCreator = () => {
 		<button><i class="fa-solid fa-pen-to-square" onclick=editArtPanel(${artID})></i></button>
 		<button><i class="fa-solid fa-trash" onclick=deleteArt(${artID})></i></button>
 	</div>`;
+	newArt.innerHTML = DOMPurify.sanitize(newArtInner);
 	list.append(newArt);
 	artID++;
 };
@@ -169,7 +170,7 @@ const sortFun = () => {
 			oldValuesOrder.push(valueNum);
 		}
 		let newValuesOrder = oldValuesOrder.sort(compareValues).reverse();
-		list.innerHTML = '';
+		list.removeChild(list.firstChild);
 		newValuesOrder.forEach(newValue => {
 			oldElementsOrder.forEach(oldElement => {
 				if (newValue === parseFloat(oldElement.id)) {
@@ -183,7 +184,7 @@ const sortFun = () => {
 			oldValuesOrder.push(valueNum);
 		}
 		let newValuesOrder = oldValuesOrder.sort(compareValues);
-		list.innerHTML = '';
+		list.removeChild(list.firstChild);
 		newValuesOrder.forEach(newValue => {
 			oldElementsOrder.forEach(oldElement => {
 				if (newValue === parseFloat(oldElement.children[1].children[2].children[1].textContent.slice(0, -2))) {
@@ -197,7 +198,7 @@ const sortFun = () => {
 			oldValuesOrder.push(valueNum);
 		}
 		let newValuesOrder = oldValuesOrder.sort(compareValues);
-		list.innerHTML = '';
+		list.removeChild(list.firstChild);
 		newValuesOrder.forEach(newValue => {
 			oldElementsOrder.forEach(oldElement => {
 				if (newValue === parseFloat(oldElement.children[1].children[3].children[1].textContent.slice(0, -4))) {

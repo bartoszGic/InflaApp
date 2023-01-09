@@ -11,6 +11,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Lexend+Zetta&family=Roboto:wght@400;700&display=swap"
         rel="stylesheet">
     <script src="https://kit.fontawesome.com/4fe546179c.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.4.3/purify.min.js"
+        integrity="sha512-3dcbndbDLLWfKWevQu8C/1qVRcxx6h+eRDSnn3/pcBZHISRJgsj3u71U/Ad6nQVHrEi05hOSr6Hnb/p0pWc94w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <link rel="stylesheet" href="./css/main.css">
 </head>
@@ -31,6 +34,81 @@
             </div>
         </div>
         <ul class="list">
+            <li id="0">
+                <div class="name">1</div>
+                <div class="article-data">
+                    <div class="dates">
+                        <p class="start-date article-data-value">Od <span>2023-01-09</span></p>
+                        <p class="actual-date article-data-value">Do <span>2023-01-09</span></p>
+                    </div>
+                    <div class="prices">
+                        <p class="start-price article-data-value"><span>34</span> zł</p>
+                        <p class="actual-price article-data-value"><span>34</span> zł</p>
+                    </div>
+                    <div class="infla">
+                        <p>Wartość</p>
+                        <p class="infla-value article-data-value" style="color: var(--neutralColor);">0.0 %</p>
+                    </div>
+                    <div class="scale">
+                        <p>Skala</p>
+                        <p class="scale-value article-data-value">0 dni</p>
+                    </div>
+                </div>
+                <div class="tools">
+                    <button><i class="fa-solid fa-pen-to-square" onclick="editArtPanel(0)"></i></button>
+                    <button><i class="fa-solid fa-trash" onclick="deleteArt(0)"></i></button>
+                </div>
+            </li>
+            <li id="1">
+                <div class="name">2</div>
+                <div class="article-data">
+                    <div class="dates">
+                        <p class="start-date article-data-value">Od <span>2023-01-09</span></p>
+                        <p class="actual-date article-data-value">Do <span>2023-01-13</span></p>
+                    </div>
+                    <div class="prices">
+                        <p class="start-price article-data-value"><span>34</span> zł</p>
+                        <p class="actual-price article-data-value"><span>36</span> zł</p>
+                    </div>
+                    <div class="infla">
+                        <p>Wartość</p>
+                        <p class="infla-value article-data-value" style="color: var(--inflaColor);">5.9 %</p>
+                    </div>
+                    <div class="scale">
+                        <p>Skala</p>
+                        <p class="scale-value article-data-value">4 dni</p>
+                    </div>
+                </div>
+                <div class="tools">
+                    <button><i class="fa-solid fa-pen-to-square" onclick="editArtPanel(1)"></i></button>
+                    <button><i class="fa-solid fa-trash" onclick="deleteArt(1)"></i></button>
+                </div>
+            </li>
+            <li id="2">
+                <div class="name">3</div>
+                <div class="article-data">
+                    <div class="dates">
+                        <p class="start-date article-data-value">Od <span>2023-01-09</span></p>
+                        <p class="actual-date article-data-value">Do <span>2023-01-15</span></p>
+                    </div>
+                    <div class="prices">
+                        <p class="start-price article-data-value"><span>34</span> zł</p>
+                        <p class="actual-price article-data-value"><span>33</span> zł</p>
+                    </div>
+                    <div class="infla">
+                        <p>Wartość</p>
+                        <p class="infla-value article-data-value" style="color: var(--deflaColor);">-2.9 %</p>
+                    </div>
+                    <div class="scale">
+                        <p>Skala</p>
+                        <p class="scale-value article-data-value">6 dni</p>
+                    </div>
+                </div>
+                <div class="tools">
+                    <button><i class="fa-solid fa-pen-to-square" onclick="editArtPanel(2)"></i></button>
+                    <button><i class="fa-solid fa-trash" onclick="deleteArt(2)"></i></button>
+                </div>
+            </li>
         </ul>
     </div>
 
@@ -68,7 +146,6 @@
             </div>
         </form>
     </div>
-
     <script src="./script.js"></script>
 </body>
 
