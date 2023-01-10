@@ -43,8 +43,8 @@ const newArtCreator = () => {
 		</div>
 	</div>
 	<div class="tools">
-		<button><i class="fa-solid fa-pen-to-square" onclick=editArtPanel(${artID})></i></button>
-		<button><i class="fa-solid fa-trash" onclick=deleteArt(${artID})></i></button>
+		<button><i class="fa-solid fa-pen-to-square"></i></button>
+		<button><i class="fa-solid fa-trash"></i></button>
 	</div>`;
 	newArt.innerHTML = DOMPurify.sanitize(newArtInner);
 	list.append(newArt);
@@ -249,3 +249,12 @@ newArtBtn.addEventListener('click', () => {
 	showUpActualDate();
 });
 sortBtn.addEventListener('click', sortFun);
+list.addEventListener('click', e => {
+	if (e.target.matches('.fa-pen-to-square')) {
+		identifier = e.target.closest('li').id;
+		editArtPanel(identifier);
+	} else if (e.target.matches('.fa-trash')) {
+		identifier = e.target.closest('li').id;
+		deleteArt(identifier);
+	}
+});
