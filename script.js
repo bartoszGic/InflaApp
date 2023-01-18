@@ -258,13 +258,11 @@ list.addEventListener('click', e => {
 		deleteArt(identifier);
 	}
 });
-popup.addEventListener('click', e => {
-	if (e.target.matches('.number')) {
-		let val = e.target;
-		val.addEventListener('input', e => {
-			if (e.data === 'e' || e.data === 'E' || e.data === '-' || e.data === '+') {
-				e.target.value = '';
-			}
-		});
-	}
+
+[startPrice, endPrice].forEach(el => {
+	el.addEventListener('input', e => {
+		if (e.data === 'e' || e.data === 'E' || e.data === '+' || e.data === '-') {
+			el.value = '';
+		}
+	});
 });
