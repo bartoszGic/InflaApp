@@ -113,6 +113,16 @@ const checkArtName = () => {
 const checkPrice = () => {
 	[startPrice, endPrice].forEach(el => {
 		el.value !== '' ? clearError([el]) : showError(el);
+		let arrFromInput = [...el.value].map(str => parseFloat(str));
+		let sum = 0;
+		for (let i = 0; i < arrFromInput.length; i++) {
+			if (!isNaN(arrFromInput[i])) {
+				sum += arrFromInput[i];
+			} else {
+				sum = 0;
+			}
+		}
+		sum !== 0 ? clearError([el]) : showError(el);
 	});
 };
 const showUpActualDate = () => {
