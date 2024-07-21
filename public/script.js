@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	};
 
 	const getApiUrl = (path = '') => {
-		const baseUrl = window.location.hostname === '127.0.0.1' ? 'http://localhost:5555' : '../backend/api';
+		const baseUrl = window.location.hostname === '127.0.0.1' ? 'http://localhost:5555' : './backend/api';
 		return `${baseUrl}${path}`;
 	};
 
