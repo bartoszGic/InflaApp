@@ -1,8 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
-// const port = process.env.PORT || 5555;
-const port = 5555;
+const port = process.env.PORT || 5555;
+// const port = 5555;
 let articles = [];
 
 app.use(cors());
