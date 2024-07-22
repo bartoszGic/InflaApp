@@ -7,16 +7,5 @@
 	"routes": [
 		{ "src": "/api/(.*)", "dest": "/backend/api/index.js" },
 		{ "src": "/(.*)", "dest": "/public/$1" }
-	],
-	"headers": [
-		{
-			"source": "/(.*)",
-			"headers": [
-				{
-					"key": "Content-Security-Policy",
-					"value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; connect-src 'self' https://vercel.live;"
-				}
-			]
-		}
 	]
 }
