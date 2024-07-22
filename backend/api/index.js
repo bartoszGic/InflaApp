@@ -9,6 +9,7 @@ app.use(express.json());
 
 app.get('/', (req, res) => {
     res.json(articles);
+    console.log(res);
 });
 
 app.post('/', (req, res) => {
