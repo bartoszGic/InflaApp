@@ -138,6 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			const response = await fetch(getApiUrl('/'));
 			console.log(response);
 			const articles = await response.json();
+			console.log(articles);
 			articles.forEach(article => {
 				const newArt = createElementFromHTML(generateArticleTemplate(article));
 				list.append(newArt);
