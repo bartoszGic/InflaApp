@@ -77,13 +77,12 @@ document.addEventListener('DOMContentLoaded', () => {
 	};
 
 	const getApiUrl = (path = '') => {
-		const baseUrl = window.location.hostname === '127.0.0.1' ? 'http://localhost:5555' : '/api';
+		const baseUrl = window.location.hostname.includes('localhost') || window.location.hostname === '127.0.0.1'
+			? 'http://localhost:5555'
+			: '/api';
 		return `${baseUrl}${path}`;
 	};
-	// const getApiUrl = (path = '') => {
-	// 	const baseUrl = window.location.hostname === 'localhost' ? 'http://localhost:5555' : '/api';
-	// 	return `${baseUrl}${path}`;
-	// };
+
 
 	const createNewArt = () => {
 		const article = {
