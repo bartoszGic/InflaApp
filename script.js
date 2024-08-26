@@ -76,12 +76,14 @@ document.addEventListener('DOMContentLoaded', () => {
 		art.removeAttribute('active');
 	};
 
-	// const getApiUrl = (path = '') => {
-	// 	const baseUrl = window.location.hostname.includes('localhost') || window.location.hostname === '127.0.0.1'
-	// 		? 'http://localhost:5555'
-	// 		: '/api';
-	// 	return `${baseUrl}${path}`;
-	// };
+	const getApiUrl = (path = '') => {
+		const baseUrl =
+			window.location.hostname.includes('localhost') || window.location.hostname === '127.0.0.1'
+				? 'http://localhost:5555'
+				: process.env.PORT;
+		return `${baseUrl}${path}`;
+	};
+
 
 
 	const createNewArt = () => {
@@ -97,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		list.append(newArt);
 		calculateValues(newArt);
 		calculateDays(newArt);
-		// saveArticleToServer(article);
+		saveArticleToServer(article);
 	};
 
 	const updateArt = (art) => {
@@ -109,13 +111,13 @@ document.addEventListener('DOMContentLoaded', () => {
 		art.querySelector('.actual-price span').textContent = endPrice.value;
 		calculateValues(art);
 		calculateDays(art);
-		// updateArticleOnServer(id, {
-		// 	name: artName.value,
-		// 	startDate: startDate.value,
-		// 	startPrice: startPrice.value,
-		// 	endDate: endDate.value,
-		// 	endPrice: endPrice.value
-		// });
+		updateArticleOnServer(id, {
+			name: artName.value,
+			startDate: startDate.value,
+			startPrice: startPrice.value,
+			endDate: endDate.value,
+			endPrice: endPrice.value
+		});
 	};
 
 	const handleSort = () => {
@@ -132,71 +134,69 @@ document.addEventListener('DOMContentLoaded', () => {
 		items.sort((a, b) => getValue(a) - getValue(b)).forEach(item => list.append(item));
 	};
 
-	// const fetchArticlesFromServer = async () => {
-	// 	loader.style.display = 'block'
-	// 	try {
-	// 		const response = await fetch(getApiUrl('/'));
-	// 		console.log(response);
-	// 		const articles = await response.json();
-	// 		console.log(articles);
-	// 		articles.forEach(article => {
-	// 			const newArt = createElementFromHTML(generateArticleTemplate(article));
-	// 			list.append(newArt);
-	// 			calculateValues(newArt);
-	// 			calculateDays(newArt);
-	// 		});
-	// 		loader.style.display = 'none'
-	// 	} catch (error) {
-	// 		console.error('Error fetching articles:', error);
-	// 	}
-	// };
+	const fetchArticlesFromServer = async () => {
+		loader.style.display = 'block'
+		try {
+			const response = await fetch(getApiUrl('/'));
+			const articles = await response.json();
+			articles.forEach(article => {
+				const newArt = createElementFromHTML(generateArticleTemplate(article));
+				list.append(newArt);
+				calculateValues(newArt);
+				calculateDays(newArt);
+			});
+			loader.style.display = 'none'
+		} catch (error) {
+			console.error('Error fetching articles:', error);
+		}
+	};
 
-	// const saveArticleToServer = async (article) => {
-	// 	try {
-	// 		await fetch(getApiUrl('/'), {
-	// 			method: 'POST',
-	// 			headers: {
-	// 				'Content-Type': 'application/json'
-	// 			},
-	// 			body: JSON.stringify(article)
-	// 		});
-	// 	} catch (error) {
-	// 		console.error('Error saving article:', error);
-	// 	}
-	// };
+	const saveArticleToServer = async (article) => {
+		try {
+			await fetch(getApiUrl('/'), {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(article)
+			});
+		} catch (error) {
+			console.error('Error saving article:', error);
+		}
+	};
 
-	// const deleteArticleFromServer = async (id) => {
-	// 	try {
-	// 		const response = await fetch(getApiUrl(`/${id}`), {
-	// 			method: 'DELETE'
-	// 		});
-	// 		if (response.ok) {
-	// 			console.log('Article deleted from server');
-	// 		} else {
-	// 			console.error('Failed to delete article from server');
-	// 		}
-	// 	} catch (error) {
-	// 		console.error('Error deleting article:', error);
-	// 	}
-	// };
+	const deleteArticleFromServer = async (id) => {
+		try {
+			const response = await fetch(getApiUrl(`/${id}`), {
+				method: 'DELETE'
+			});
+			if (response.ok) {
+				console.log('Article deleted from server');
+			} else {
+				console.error('Failed to delete article from server');
+			}
+		} catch (error) {
+			console.error('Error deleting article:', error);
+		}
+	};
 
-	// const updateArticleOnServer = async (id, updatedArticle) => {
-	// 	try {
-	// 		const response = await fetch(getApiUrl(`/${id}`), {
-	// 			method: 'PUT',
-	// 			headers: {
-	// 				'Content-Type': 'application/json'
-	// 			},
-	// 			body: JSON.stringify(updatedArticle)
-	// 		});
-	// 		if (!response.ok) {
-	// 			throw new Error('Failed to update article on server');
-	// 		}
-	// 		console.log('Article updated on server');
-	// 	} catch (error) {
-	// 		console.error('Error updating article:', error);
-	// 	}
-	// };
+	const updateArticleOnServer = async (id, updatedArticle) => {
+		try {
+			const response = await fetch(getApiUrl(`/${id}`), {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(updatedArticle)
+			});
+			if (!response.ok) {
+				throw new Error('Failed to update article on server');
+			}
+			console.log('Article updated on server');
+		} catch (error) {
+			console.error('Error updating article:', error);
+		}
+	};
 
 	const mainFunction = () => {
 		clearErrors([artName, startDate, startPrice, endDate, endPrice]);
@@ -250,9 +250,9 @@ document.addEventListener('DOMContentLoaded', () => {
 			endDate.value = li.querySelector('.actual-date span').textContent;
 			endPrice.value = li.querySelector('.actual-price span').textContent;
 		} else if (e.target.classList.contains('fa-trash')) {
-			// const id = parseInt(li.id);
+			const id = parseInt(li.id);
 			li.remove();
-			// deleteArticleFromServer(id);
+			deleteArticleFromServer(id);
 		}
 	});
 
@@ -272,5 +272,5 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
 		});
 	});
-	// fetchArticlesFromServer();
+	fetchArticlesFromServer();
 });
