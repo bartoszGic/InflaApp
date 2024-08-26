@@ -77,11 +77,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	};
 
 	const getApiUrl = (path = '') => {
-		const baseUrl =
+		const url =
 			window.location.hostname.includes('localhost') || window.location.hostname === '127.0.0.1'
 				? 'http://localhost:5555'
 				: 'https://inflapp-backend.vercel.app'
-		return `${baseUrl}${path}`;
+		return `${url}${path}`;
 	};
 
 
